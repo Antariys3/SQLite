@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Таблица треки</title>
+    <style>
+        a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Таблица треки</h1>
+<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
+    Главная страница
+</a>
+<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/adding_tracks">
+    Добавить 100 новых треков
+</a>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Исполнитель</th>
+            <th>Длина трека (сек)</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for track in result %}
+            <tr>
+                <td>{{track[0]}}</td>
+                <td>{{track[1]}}</td>
+                <td>{{track[2]}}</td>
+                <td>{{track[3]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

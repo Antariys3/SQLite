@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Количество уникальных имен</title>
+        <style>
+        a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Количество уникальных имен с таблицы customers</h1>
+<pre>
+Всего имен в таблице {{ list_all_first_name }}
+Уникальных имен {{ list_set_first_name }}
+</pre>
+<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/adding_clients">
+    Добавить 100 новых клиентов
+</a>
+<a aria-current="page" class="container nav-link d-flex align-items-center gap-2 active" href="/">
+    Главная страница
+</a>
+</body>
+</html>
