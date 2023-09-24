@@ -1,8 +1,8 @@
-from faker import Faker
-from flask import Flask, render_template
-
 import os
 import sqlite3
+
+from faker import Faker
+from flask import Flask, render_template
 
 app = Flask(__name__)
 fake = Faker("ru_RU")
