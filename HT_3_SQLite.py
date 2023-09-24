@@ -78,21 +78,16 @@ def create_table_customers():
 def create_table_tracks():
     con = sqlite3.connect("data.db")
     cur = con.cursor()
-    try:
-        cur.execute('''
-            CREATE TABLE tracks
-            (
-                ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                LastName varchar(255),
-                TrackLength varchar(50),
-                ReleaseDate varchar(50)
-            )
-        ''')
-        con.commit()
-    except sqlite3.Error as ex:
-        print("Таблица уже создана: ", ex)
-    finally:
-        con.close()
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS tracks
+        (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            LastName varchar(255),
+            TrackLength varchar(50),
+            ReleaseDate varchar(50)
+        )
+    ''')
+    con.commit()
 
 
 def populate_table_customers():
