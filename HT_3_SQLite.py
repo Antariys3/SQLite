@@ -1,8 +1,8 @@
-import os
-import sqlite3
-
 from faker import Faker
 from flask import Flask, render_template
+
+import os
+import sqlite3
 
 app = Flask(__name__)
 fake = Faker("ru_RU")
@@ -17,12 +17,10 @@ def index():
 def names():
     con = sqlite3.connect("data.db")
     cur = con.cursor()
-    res_all = cur.execute('SELECT FirstName FROM customers')
-    list_all_first_name = len(res_all.fetchall())
-    res_set = cur.execute('SELECT DISTINCT FirstName FROM customers')
-    list_set_first_name = len(res_set.fetchall())
-    print(list_all_first_name)
-    print(list_set_first_name)
+    res_all = 'SELECT COUNT(*) FROM customers'
+    list_all_first_name = cur.execute(res_all).fetchone()[0]
+    res_set = 'SELECT COUNT(DISTINCT FirstName) FROM customers'
+    list_set_first_name = cur.execute(res_set).fetchone()[0]
     con.close()
     return render_template("names.html",
                            list_all_first_name=list_all_first_name, list_set_first_name=list_set_first_name)
@@ -34,7 +32,6 @@ def tracks():
     cur = con.cursor()
     res = cur.execute('SELECT COUNT(ID) FROM tracks')
     result = res.fetchone()[0]
-    print(result)
     con.close()
     return render_template("tracks.html", result=result)
 
@@ -64,23 +61,18 @@ def adding_tracks():
 def create_table_customers():
     con = sqlite3.connect("data.db")
     cur = con.cursor()
-    try:
-        cur.execute('''
-            -- dialect: sqlite
-            CREATE TABLE customers
-            (
-                ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                LastName varchar(255),
-                FirstName varchar(255),
-                Profession varchar(255),
-                PhoneNumber varchar(255)
-            )
-        ''')
-        con.commit()
-    except sqlite3.Error as ex:
-        print("Таблица уже создана: ", ex)
-    finally:
-        con.close()
+    cur.execute('''
+        -- dialect: sqlite
+        CREATE TABLE IF NOT EXISTS customers
+        (
+            ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            LastName varchar(255),
+            FirstName varchar(255),
+            Profession varchar(255),
+            PhoneNumber varchar(255)
+        )
+    ''')
+    con.commit()
 
 
 def create_table_tracks():
